@@ -1,0 +1,153 @@
+#this directory variable declaration
+LOCAL_PATH := $(call my-dir)/ffmpeg
+
+#avutil module
+include $(CLEAR_VARS)
+LOCAL_MODULE := avutil
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+include $(LOCAL_PATH)/../lib$(LOCAL_MODULE)_files.mk
+include $(BUILD_SHARED_LIBRARY)
+#end of avutil module
+
+#swscale module
+include $(CLEAR_VARS)
+LOCAL_MODULE    := swscale
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+LOCAL_SHARED_LIBRARIES := avutil
+LOCAL_LDFLAGS := 
+include $(LOCAL_PATH)/../lib$(LOCAL_MODULE)_files.mk
+include $(BUILD_SHARED_LIBRARY) 
+#end of swscale module
+
+#avformat module
+include $(CLEAR_VARS)
+LOCAL_MODULE := avformat
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+include $(LOCAL_PATH)/../lib$(LOCAL_MODULE)_files.mk
+LOCAL_SHARED_LIBRARIES := avutil avcodec
+LOCAL_LDFLAGS := -L$(SYSROOT)/usr/lib -lz
+include $(BUILD_SHARED_LIBRARY)
+#end of avformat module
+
+#avcodec module
+include $(CLEAR_VARS)
+LOCAL_MODULE := avcodec
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+include $(LOCAL_PATH)/../lib$(LOCAL_MODULE)_files.mk
+LOCAL_SHARED_LIBRARIES := avutil
+LOCAL_LDFLAGS := -L$(SYSROOT)/usr/lib -lz -lm
+include $(BUILD_SHARED_LIBRARY)
+#end of avcodec module
+
+#avdevice module
+include $(CLEAR_VARS)
+LOCAL_MODULE := avdevice
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+include $(LOCAL_PATH)/../lib$(LOCAL_MODULE)_files.mk
+LOCAL_SHARED_LIBRARIES := avutil avcodec avformat
+LOCAL_LDFLAGS := -L$(SYSROOT)/usr/lib -lz -lm
+include $(BUILD_SHARED_LIBRARY)
+#end of avdevice module
+
+#postproc module
+include $(CLEAR_VARS)
+LOCAL_MODULE := postproc
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+include $(LOCAL_PATH)/../lib$(LOCAL_MODULE)_files.mk
+LOCAL_SHARED_LIBRARIES := avutil
+LOCAL_LDFLAGS := -L$(SYSROOT)/usr/lib -lz -lm
+include $(BUILD_SHARED_LIBRARY)
+#end of postproc module
+
+#avfilter module
+include $(CLEAR_VARS)
+LOCAL_MODULE := avfilter
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+include $(LOCAL_PATH)/../lib$(LOCAL_MODULE)_files.mk
+LOCAL_SHARED_LIBRARIES := avutil avcodec avformat swscale
+LOCAL_LDFLAGS := -L$(SYSROOT)/usr/lib -lz -lm
+include $(BUILD_SHARED_LIBRARY)
+#end of avfilter module
+
+#avutil module
+include $(CLEAR_VARS)
+LOCAL_MODULE := avutil_static
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+include $(LOCAL_PATH)/../libavutil_files.mk
+include $(BUILD_STATIC_LIBRARY)
+#end of avutil module
+
+#swscale module
+include $(CLEAR_VARS)
+LOCAL_MODULE    := swscale_static
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+LOCAL_STATIC_LIBRARIES := avutil_static
+LOCAL_LDFLAGS := 
+include $(LOCAL_PATH)/../libswscale_files.mk
+include $(BUILD_STATIC_LIBRARY) 
+#end of swscale module
+
+#avformat module
+include $(CLEAR_VARS)
+LOCAL_MODULE := avformat_static
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+include $(LOCAL_PATH)/../libavformat_files.mk
+LOCAL_STATIC_LIBRARIES := avutil_static avcodec_static
+LOCAL_LDFLAGS := -L$(SYSROOT)/usr/lib -lz
+include $(BUILD_STATIC_LIBRARY)
+#end of avformat module
+
+#avcodec module
+include $(CLEAR_VARS)
+LOCAL_MODULE := avcodec_static
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+include $(LOCAL_PATH)/../libavcodec_files.mk
+LOCAL_STATIC_LIBRARIES := avutil_static
+LOCAL_LDFLAGS := -L$(SYSROOT)/usr/lib -lz -lm
+include $(BUILD_STATIC_LIBRARY)
+#end of avcodec module
+
+#avdevice module
+include $(CLEAR_VARS)
+LOCAL_MODULE := avdevice_static
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+include $(LOCAL_PATH)/../libavdevice_files.mk
+LOCAL_STATIC_LIBRARIES := avutil_static avcodec_static avformat_static
+LOCAL_LDFLAGS := -L$(SYSROOT)/usr/lib -lz -lm
+include $(BUILD_STATIC_LIBRARY)
+#end of avdevice module
+
+#postproc module
+include $(CLEAR_VARS)
+LOCAL_MODULE := postproc_static
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+include $(LOCAL_PATH)/../libpostproc_files.mk
+LOCAL_STATIC_LIBRARIES := avutil_static
+LOCAL_LDFLAGS := -L$(SYSROOT)/usr/lib -lz -lm
+include $(BUILD_STATIC_LIBRARY)
+#end of postproc module
+
+#avfilter module
+include $(CLEAR_VARS)
+LOCAL_MODULE := avfilter_static
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DHAVE_AV_CONFIG_H
+include $(LOCAL_PATH)/../libavfilter_files.mk
+LOCAL_STATIC_LIBRARIES := avutil_static avcodec_static avformat_static swscale_static
+LOCAL_LDFLAGS := -L$(SYSROOT)/usr/lib -lz -lm
+include $(BUILD_STATIC_LIBRARY)
+#end of avfilter module
+
